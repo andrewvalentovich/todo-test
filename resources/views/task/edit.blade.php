@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col-6">
 
-                                    <form action="{{ route('task.image.update', $task->id) }}" method="post" style="display: inline-block;">
+                                    <form action="{{ route('task.image.update', $task->id) }}" method="post" class="mb-2" style="display: inline-block;">
                                         @csrf
                                         @method('patch')
                                         <input type="submit" class="btn btn-danger" value="Delete image">
@@ -53,6 +53,18 @@
                                                 <option {{ $task->status == $id ? 'selected' : '' }} value="{{ $id }}">{{ $status }}</option>
                                             @endforeach
                                         </select>
+
+                                        <div class="form-group">
+                                            <select class="" id="tasks_tags1" name="tags[]" multiple="multiple" data-placeholder="Выберите тэги" style="width: 100%;">
+                                                @foreach($tags as $tag)
+                                                    @if(in_array($tag->id, $task->tags->pluck('id')->toArray()))
+                                                        <option selected value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                                    @else
+                                                        <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
 
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Apply">

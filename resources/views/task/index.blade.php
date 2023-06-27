@@ -35,8 +35,10 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">No.</th>
+                                    <th scope="col">Preview</th>
                                     <th scope="col">Todo item</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Tags</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                                 </thead>
@@ -51,6 +53,15 @@
                                             </td>
                                             <td>{{ $task->title }}</td>
                                             <td>{{ $task->status }}</td>
+                                            <td>
+                                                @foreach($task->tags as $id => $tag)
+                                                    @if($id < count($task->tags) - 1)
+                                                        {{ $tag->title . ',' }}
+                                                    @else
+                                                        {{ $tag->title }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <a href="{{ route('task.edit', $task->id) }}" class="btn btn-primary">Edit</a>
                                                 <form action="{{ route('task.delete', $task->id) }}" method="post" style="display: inline-block;">

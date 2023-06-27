@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
             'status' => 'required',
             'preview_image' => 'nullable',
             'image' => 'nullable',
+            'tags' => 'nullable|array',
         ];
     }
 }

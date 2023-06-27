@@ -26,7 +26,6 @@
                                 </thead>
                                 <tbody>
                                     @foreach($tags as $tag)
-                                        {{ dump($tag->tasks) }}
                                         <tr>
                                             <th scope="row">{{ $tag->id }}</th>
                                             <td>{{ $tag->title }}</td>
