@@ -52,7 +52,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $task->title }}</td>
-                                            <td>{{ $task->status }}</td>
+                                            <td>{{ $statuses[$task->status] }}</td>
                                             <td>
                                                 @foreach($task->tags as $id => $tag)
                                                     @if($id < count($task->tags) - 1)

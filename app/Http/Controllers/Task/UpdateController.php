@@ -14,10 +14,13 @@ class UpdateController extends Controller
     public function __invoke(UpdateRequest $request, Task $task)
     {
         $data = $request->validated();
-        $tagsIds = $data['tags'];
-        unset($data['tags']);
 
-        $task->tags()->sync($tagsIds);
+        if(isset($data['tags'])) {
+            $tagsIds = $data['tags'];
+            unset($data['tags']);
+
+            $task->tags()->sync($tagsIds);
+        }
 
         if (isset($data['image'])) {
             $previewName = 'prev_' . md5(Carbon::now() . '_' . $data['image']->getClientOriginalName()) . '.' .$data['image']->getClientOriginalExtension();
