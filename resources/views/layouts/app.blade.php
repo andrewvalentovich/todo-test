@@ -30,7 +30,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a href="{{ route('task.index') }}" class="nav-lin">Задачи</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +78,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @yield('scripts')
 </body>
 </html>
