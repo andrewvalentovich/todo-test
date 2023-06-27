@@ -44,6 +44,11 @@
                                     @foreach($tasks as $task)
                                         <tr>
                                             <th scope="row">{{ $task->id }}</th>
+                                            <td>
+                                                @if(isset($task->image))
+                                                    <a href="{{ asset('storage/' . $task->image) }}" target="_blank"><img src="{{ asset('storage/' . $task->preview_image) }}" alt=""></a>
+                                                @endif
+                                            </td>
                                             <td>{{ $task->title }}</td>
                                             <td>{{ $task->status }}</td>
                                             <td>
@@ -75,13 +80,13 @@
                 console.log(msg);
                 $.ajax({
                     type: 'POST',
-                    url: '/api/task/store', // Обработчик собственно
+                    url: '/api/task/store', // Обработчик
                     data: msg,
                     success: function(data) {
                         console.log('Успех!');
                         console.log(data);
                     },
-                    error:  function(){
+                    error:  function(data){
                         console.log('Ошибка!');
                         console.log(data);
                     }

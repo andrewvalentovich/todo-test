@@ -12,7 +12,6 @@ class IndexController extends Controller
         $tasks = Task::all();
         $statuses = Task::getStatuses();
 
-        dd($_SESSION);
         return view('task.index', compact('tasks', 'statuses'));
     }
 }

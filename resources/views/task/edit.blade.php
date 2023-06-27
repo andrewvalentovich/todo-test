@@ -11,6 +11,13 @@
 
                             <div class="row">
                                 <div class="col-6">
+
+                                    <form action="{{ route('task.image.update', $task->id) }}" method="post" style="display: inline-block;">
+                                        @csrf
+                                        @method('patch')
+                                        <input type="submit" class="btn btn-danger" value="Delete image">
+                                    </form>
+
                                     <form action="{{ route('task.update', $task->id) }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('patch')
