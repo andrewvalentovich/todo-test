@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <a href="{{ route('task.index') }}" class="nav-lin">Задачи</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tag.index') }}" class="nav-lin">Тэги</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -30,3 +30,12 @@ Route::group(['prefix' => 'task', 'middleware' => ['auth']], function () {
     Route::patch('image/{task}', \App\Http\Controllers\Task\ImageUpdateController::class)->name('task.image.update');
     Route::delete('/{task}', \App\Http\Controllers\Task\DeleteController::class)->name('task.delete');
 });
+
+Route::group(['prefix' => 'tag', 'middleware' => ['auth']], function () {
+    Route::get('/', \App\Http\Controllers\Tag\IndexController::class)->name('tag.index');
+    Route::get('/create', \App\Http\Controllers\Tag\CreateController::class)->name('tag.create');
+    Route::post('/', \App\Http\Controllers\Tag\StoreController::class)->name('tag.store');
+    Route::get('/{tag}/edit', \App\Http\Controllers\Tag\EditController::class)->name('tag.edit');
+    Route::patch('/{tag}', \App\Http\Controllers\Tag\UpdateController::class)->name('tag.update');
+    Route::delete('/{tag}', \App\Http\Controllers\Tag\DeleteController::class)->name('tag.delete');
+});

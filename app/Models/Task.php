@@ -9,6 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $table = 'tasks';
     protected $fillable = [];
     protected $guarded = [];
 
@@ -21,5 +22,10 @@ class Task extends Model
             self::CLOSE_STATUS => 'Close',
             self::IN_PROGRESS_STATUS => 'In progress'
         ];
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'task_tags', 'task_id', 'tag_id');
     }
 }
