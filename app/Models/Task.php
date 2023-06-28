@@ -25,9 +25,4 @@ class Task extends Model
             self::IN_PROGRESS_STATUS => 'In progress'
         ];
     }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'task_tags', 'task_id', 'tag_id');
-    }
 }
