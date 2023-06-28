@@ -2,20 +2,22 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Planner extends Model
 {
     use HasFactory;
+    use Filterable; // Подключаем созданный трейт
 
     protected $table = 'planners';
     protected $guarded = [];
     protected $fillable = [];
 
-    public function tags()
+    public function getAuthor()
     {
-        return $this->belongsToMany(Tag::class, 'planner_tags', 'planner_id', 'tag_id');
+        return $this->author();
     }
 
     public function author()
@@ -25,6 +27,6 @@ class Planner extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'planner_id', 'id');
+        return $this->hasMany(Task::class);
     }
 }

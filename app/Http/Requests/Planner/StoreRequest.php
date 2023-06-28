@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\API\Task;
+namespace App\Http\Requests\Planner;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,11 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'content' => 'nullable|string',
-            'status' => 'required',
-            'preview_image' => 'nullable',
-            'image' => 'nullable',
-            'planner_id' => 'required|integer',
+            'author_id' => 'required|integer',
         ];
     }
 }

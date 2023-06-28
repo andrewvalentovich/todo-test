@@ -31,10 +31,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="{{ route('task.index') }}" class="nav-lin">Задачи</a>
+                            <a href="{{ route('planner.index') }}" class="nav-link">Планнеры</a>
                         </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{ route('task.index') }}" class="nav-link">Задачи</a>--}}
+{{--                        </li>--}}
                         <li class="nav-item">
-                            <a href="{{ route('tag.index') }}" class="nav-lin">Тэги</a>
+                            <a href="{{ route('tag.index') }}" class="nav-link">Тэги</a>
                         </li>
                     </ul>
 

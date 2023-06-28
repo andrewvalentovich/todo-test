@@ -8,12 +8,13 @@
                     <div class="card rounded-3">
                         <div class="card-body p-4">
 
-                            <h4 class="text-center my-3 pb-3">To Do App</h4>
+                            <h4 class="text-center my-3 pb-3">Planner - {{ $planner->id . " " . $planner->title }}</h4>
                             <h6 class="text-center my-1 pb-1">Create</h6>
                             <form id="addTaskForm" class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
                                 <div class="col-12">
                                     <div class="form-outline">
                                         <input type="text" name="title" id="form-title" class="form-control" placeholder="Enter a title here" />
+                                        <input type="hidden" name="planner_id" value="{{ $planner->id }}" id="form-planner" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -40,9 +41,9 @@
                                 </div>
                             </form>
 
-                            <form class="pb-5" method="get" action="{{ route('task.index') }}">
+                            <form class="pb-5" method="get" action="{{ route('planner.show', $planner->id) }}">
                                 <div class="form-group pb-2">
-                                    <h6 class="text-center my-1 pb-1">Search & Filter</h6>
+                                    <h6 class="text-center my-1 pb-1">TASK Search & Filter</h6>
                                 </div>
                                 <div class="form-group pb-2">
                                     <input
@@ -64,8 +65,8 @@
                                                 type="checkbox"
                                                 id="{{ $tag->title . '-' . $tag->id }}"
                                                 value="{{ $tag->id }}"
-                                                @if(isset($_GET['tags']))
-                                                    {{ in_array($tag->id ,$_GET['tags']) ? 'checked' : '' }}
+                                            @if(isset($_GET['tags']))
+                                                {{ in_array($tag->id ,$_GET['tags']) ? 'checked' : '' }}
                                                 @endif
                                             >
                                             <label class="form-check-label" for="{{ $tag->title . '-' . $tag->id }}">{{ $tag->title }}</label>
@@ -87,7 +88,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($tasks as $task)
+                                    @foreach($planner->tasks as $task)
                                         <tr>
                                             <th scope="row">{{ $task->id }}</th>
                                             <td>
@@ -142,6 +143,7 @@
                     success: function(data) {
                         console.log('Успех!');
                         console.log(data);
+                        location.reload();
                     },
                     error:  function(data){
                         console.log('Ошибка!');

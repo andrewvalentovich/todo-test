@@ -34,6 +34,6 @@ class UpdateController extends Controller
 
         $task->update($data);
 
-        return redirect()->route('task.index');
+        return redirect()->route('planner.show', $task->planner_id);
     }
 }

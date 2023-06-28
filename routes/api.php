@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'task'], function () {
     Route::post('/store', \App\Http\Controllers\API\Task\StoreController::class);
 });
+
+Route::group(['prefix' => 'planner'], function () {
+    Route::post('/store', \App\Http\Controllers\API\Planner\StoreController::class);
+});

@@ -21,6 +21,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::group(['prefix' => 'planner', 'middleware' => ['auth']], function () {
+    Route::get('/', \App\Http\Controllers\Planner\IndexController::class)->name('planner.index');
+    Route::get('/create', \App\Http\Controllers\Planner\CreateController::class)->name('planner.create');
+    Route::post('/', \App\Http\Controllers\Planner\StoreController::class)->name('planner.store');
+    Route::get('/{planner}/edit', \App\Http\Controllers\Planner\EditController::class)->name('planner.edit');
+    Route::get('/{planner}', \App\Http\Controllers\Planner\ShowController::class)->name('planner.show');
+    Route::patch('/{planner}', \App\Http\Controllers\Planner\UpdateController::class)->name('planner.update');
+    Route::delete('/{planner}', \App\Http\Controllers\Planner\DeleteController::class)->name('planner.delete');
+});
+
 Route::group(['prefix' => 'task', 'middleware' => ['auth']], function () {
     Route::get('/', \App\Http\Controllers\Task\IndexController::class)->name('task.index');
     Route::get('/create', \App\Http\Controllers\Task\CreateController::class)->name('task.create');
