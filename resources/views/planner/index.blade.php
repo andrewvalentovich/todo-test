@@ -46,6 +46,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($planners as $planner)
+                                        @can('show-planner', $planner)
                                         <tr>
                                             <th scope="row">{{ $planner->id }}</th>
                                             <td>{{ $planner->getAuthor->email }}</td>
@@ -60,6 +61,7 @@
                                                 </form>
                                             </td>
                                         </tr>
+                                        @endcan
                                     @endforeach
                                 </tbody>
                             </table>

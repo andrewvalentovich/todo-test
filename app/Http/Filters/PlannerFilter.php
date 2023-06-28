@@ -23,7 +23,7 @@ class PlannerFilter extends AbstractFilter
 
     protected function id(Builder $builder, $value)
     {
-        $builder->where('id', $value);
+        $builder->where('id', '=', $value);
     }
 
         protected function title(Builder $builder, $value)

@@ -14,6 +14,6 @@ class Tag extends Model
 
     public function tasks()
     {
-        return $this->belongsToMany(Planner::class, 'planner_tags', 'tag_id', 'planner_id');
+        return $this->belongsToMany(Task::class, 'task_tags', 'tag_id', 'task_id');
     }
 }
