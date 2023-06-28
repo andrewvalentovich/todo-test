@@ -46,19 +46,23 @@
                                 </thead>
                                 <tbody>
                                     @foreach($planners as $planner)
-                                        @can('show-planner', $planner)
+                                        @canany(['show-planner', 'show-roles-read'], $planner)
                                         <tr>
                                             <th scope="row">{{ $planner->id }}</th>
                                             <td>{{ $planner->getAuthor->email }}</td>
                                             <td>{{ $planner->title }}</td>
                                             <td>
-                                                <a href="{{ route('planner.show', $planner->id) }}" class="btn btn-primary">Show</a>
-                                                <a href="{{ route('planner.edit', $planner->id) }}" class="btn btn-primary">Edit</a>
-                                                <form action="{{ route('planner.delete', $planner->id) }}" method="post" style="display: inline-block;">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <input type="submit" class="btn btn-danger" value="Delete">
-                                                </form>
+                                                @can('show-roles-read', $planner)
+                                                    <a href="{{ route('planner.show', $planner->id) }}" class="btn btn-primary">Show</a>
+                                                @endcan
+                                                @canany(['show-planner', 'show-roles-edit'], $planner)
+                                                    <a href="{{ route('planner.edit', $planner->id) }}" class="btn btn-primary">Edit</a>
+                                                    <form action="{{ route('planner.delete', $planner->id) }}" method="post" style="display: inline-block;">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                         @endcan

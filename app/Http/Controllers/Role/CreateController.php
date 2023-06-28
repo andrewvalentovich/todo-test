@@ -11,7 +11,7 @@ class CreateController extends Controller
 {
     public function __invoke(Planner $planner)
     {
-        $users = User::where('id', '!=', $planner->author->id)->get();
+        $users = User::where('id', '!=', auth()->user()->getAuthIdentifier())->get();
         $roles = Role::getRoles();
         $planner_id = $planner->id;
         return view('role.create', compact('users', 'roles', 'planner_id'));

@@ -111,7 +111,7 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('task.edit', $task->id) }}" class="btn btn-primary">Edit</a>
-                                                <form action="{{ route('task.delete', $task->id) }}" method="post" style="display: inline-block;">
+                                                <form action="{{ route('task.delete', [$task->id, $planner->id]) }}" method="post" style="display: inline-block;">
                                                     @csrf
                                                     @method('delete')
                                                     <input type="submit" class="btn btn-danger" value="Delete">

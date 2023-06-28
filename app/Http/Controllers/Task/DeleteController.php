@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
+use App\Models\Planner;
 use App\Models\Task;
 
 class DeleteController extends Controller
 {
-    public function __invoke(Task $task)
+    public function __invoke(Task $task, Planner $planner)
     {
         $tagsIds = [];
         foreach ($task->tags as $tag) {
@@ -21,6 +22,6 @@ class DeleteController extends Controller
         $task->save();
         $task->delete();
 
-        return redirect()->route('task.index');
+        return redirect()->route('planner.show', $planner->id);
     }
 }
