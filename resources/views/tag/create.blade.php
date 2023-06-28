@@ -8,7 +8,7 @@
                     <div class="card rounded-3">
                         <div class="card-body p-4">
 
-                            <h4 class="text-center my-3 pb-3">Edit tag</h4>
+                            <h4 class="text-center my-3 pb-3">Create tag</h4>
 
                             <div class="row">
                                 <div class="col-6">

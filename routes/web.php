@@ -49,3 +49,11 @@ Route::group(['prefix' => 'tag', 'middleware' => ['auth']], function () {
     Route::patch('/{tag}', \App\Http\Controllers\Tag\UpdateController::class)->name('tag.update');
     Route::delete('/{tag}', \App\Http\Controllers\Tag\DeleteController::class)->name('tag.delete');
 });
+
+Route::group(['prefix' => 'role', 'middleware' => ['auth']], function () {
+    Route::get('/{planner}/create', \App\Http\Controllers\Role\CreateController::class)->name('role.create');
+    Route::post('/', \App\Http\Controllers\Role\StoreController::class)->name('role.store');
+    Route::get('/{role}/edit', \App\Http\Controllers\Role\EditController::class)->name('role.edit');
+    Route::patch('/{role}', \App\Http\Controllers\Role\UpdateController::class)->name('role.update');
+    Route::delete('/{role}', \App\Http\Controllers\Role\DeleteController::class)->name('role.delete');
+});

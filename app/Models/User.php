@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->HasMany(Planner::class);
     }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
 }

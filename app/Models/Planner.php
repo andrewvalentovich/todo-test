@@ -29,4 +29,9 @@ class Planner extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
 }

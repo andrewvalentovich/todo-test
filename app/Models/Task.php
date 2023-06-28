@@ -28,7 +28,7 @@ class Task extends Model
 
     public function planner()
     {
-        return $this->belongsTo(User::class, 'planner_id', 'id');
+        return $this->belongsTo(Planner::class, 'planner_id', 'id');
     }
 
     public function tags()
