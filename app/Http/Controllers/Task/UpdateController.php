@@ -20,6 +20,8 @@ class UpdateController extends Controller
             unset($data['tags']);
 
             $task->tags()->sync($tagsIds);
+        } else {
+            $task->tags()->detach();
         }
 
         if (isset($data['image'])) {

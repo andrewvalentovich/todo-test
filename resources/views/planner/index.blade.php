@@ -9,36 +9,11 @@
                         <div class="card-body p-4">
 
                             <h4 class="text-center my-3 pb-3">To Do App</h4>
-                            <h6 class="text-center my-1 pb-1">Create</h6>
-                            <form id="addPlannerForm" class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
-                                <div class="col-12">
-                                    <div class="form-outline">
-                                        <input type="text" name="title" id="form-title" class="form-control" placeholder="Enter a title here" />
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <input type="hidden" name="author_id" value="{{ auth()->user()->getAuthIdentifier() }}">
-                                </div>
-{{--                                <div class="col-12">--}}
-{{--                                    <input type="file" name="image" class="custom-file-input d-inline-block" id="image">--}}
-{{--                                </div>--}}
-{{--                                <div class="col-12">--}}
-{{--                                    <select class="" id="tasks_tags1" name="tags[]" multiple="multiple" data-placeholder="Выберите тэги" style="width: 100%;">--}}
-{{--                                        <option selected value="">Нет тэгов</option>--}}
-{{--                                        @foreach($tags as $tag)--}}
-{{--                                                <option value="{{ $tag->id }}">{{ $tag->title }}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-                                <div class="col-12">
-                                    <button id="addPlannerButton" type="submit" class="btn btn-primary">Add planner</button>
-                                </div>
-                            </form>
 
                             <table class="table mb-4">
                                 <thead>
                                 <tr>
-                                    <th scope="col">No.</th>
+                                    <th scope="col">Id</th>
                                     <th scope="col">Author</th>
                                     <th scope="col">Todo planner</th>
                                     <th scope="col">Actions</th>
@@ -52,7 +27,7 @@
                                             <td>{{ $planner->getAuthor->email }}</td>
                                             <td>{{ $planner->title }}</td>
                                             <td>
-                                                @can('show-roles-read', $planner)
+                                                @canany(['show-planner', 'show-roles-read'], $planner)
                                                     <a href="{{ route('planner.show', $planner->id) }}" class="btn btn-primary">Show</a>
                                                 @endcan
                                                 @canany(['show-planner', 'show-roles-edit'], $planner)
@@ -69,6 +44,23 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <hr>
+                            <h6 class="text-left my-1 pb-1">Create</h6>
+                            <form id="addPlannerForm" class="row row-cols-lg-auto g-3 justify-content-start align-items-center mb-4 pb-2">
+                                <div class="col-12">
+                                    <div class="form-outline">
+                                        <input type="text" name="title" id="form-title" class="form-control" placeholder="Enter a title here" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <input type="hidden" name="author_id" value="{{ auth()->user()->getAuthIdentifier() }}">
+                                </div>
+                                <div class="col-12">
+                                    <button id="addPlannerButton" type="submit" class="btn btn-primary">Add planner</button>
+                                </div>
+                            </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -91,6 +83,7 @@
                     success: function(data) {
                         console.log('Успех!');
                         console.log(data);
+                        location.reload();
                     },
                     error:  function(data){
                         console.log('Ошибка!');

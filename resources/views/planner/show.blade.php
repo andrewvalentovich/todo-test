@@ -2,48 +2,37 @@
 
 @section('content')
     <div class="card-body">
-        <div class="container py-5 h-100">
+        <div class="container py-2 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-12 col-xl-7">
+                    <h6 class="text-left my-1 pb-1">Create task</h6>
+                    <form id="addTaskForm" class="row row-cols-lg-auto g-3 justify-content-start align-items-center mb-4 pb-2">
+                        <div class="col-12">
+                            <div class="form-outline">
+                                <input type="text" name="title" id="form-title" class="form-control" placeholder="Enter a title here" />
+                                <input type="hidden" name="planner_id" value="{{ $planner->id }}" id="form-planner" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <select name="status" class="form-control">
+                                <option selected="selected" disabled>Выберите статус</option>
+                                @foreach($statuses as $id => $status)
+                                    <option selected value="{{ $id }}">{{ $status }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button id="addTaskButton" type="submit" class="btn btn-primary">Add task</button>
+                        </div>
+                    </form>
+
                     <div class="card rounded-3">
-                        <div class="card-body p-4">
+                        <div class="card-body">
+                            <h4 class="text-center my-1 pb-3">Planner - {{ $planner->id . " " . $planner->title }}</h4>
 
-                            <h4 class="text-center my-3 pb-3">Planner - {{ $planner->id . " " . $planner->title }}</h4>
-                            <h6 class="text-center my-1 pb-1">Create</h6>
-                            <form id="addTaskForm" class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
-                                <div class="col-12">
-                                    <div class="form-outline">
-                                        <input type="text" name="title" id="form-title" class="form-control" placeholder="Enter a title here" />
-                                        <input type="hidden" name="planner_id" value="{{ $planner->id }}" id="form-planner" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <select name="status" class="form-control">
-                                        <option selected="selected" disabled>Выберите статус</option>
-                                        @foreach($statuses as $id => $status)
-                                            <option selected value="{{ $id }}">{{ $status }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-{{--                                <div class="col-12">--}}
-{{--                                    <input type="file" name="image" class="custom-file-input d-inline-block" id="image">--}}
-{{--                                </div>--}}
-{{--                                <div class="col-12">--}}
-{{--                                    <select class="" id="tasks_tags1" name="tags[]" multiple="multiple" data-placeholder="Выберите тэги" style="width: 100%;">--}}
-{{--                                        <option selected value="">Нет тэгов</option>--}}
-{{--                                        @foreach($tags as $tag)--}}
-{{--                                                <option value="{{ $tag->id }}">{{ $tag->title }}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-                                <div class="col-12">
-                                    <button id="addTaskButton" type="submit" class="btn btn-primary">Add task</button>
-                                </div>
-                            </form>
-
-                            <form class="pb-5" method="get" action="{{ route('planner.show', $planner->id) }}">
+                            <form method="get" action="{{ route('planner.show', $planner->id) }}">
                                 <div class="form-group pb-2">
-                                    <h6 class="text-center my-1 pb-1">TASK Search & Filter</h6>
+                                    <h6 class="text-left my-1 pb-1">Search & Filter</h6>
                                 </div>
                                 <div class="form-group pb-2">
                                     <input
@@ -56,30 +45,37 @@
                                         value="{{ isset($_GET['title']) ? $_GET['title'] : '' }}"
                                     >
                                 </div>
-                                <div class="form-group pb-2">
-                                    @foreach($tags as $tag)
-                                        <div class="form-check form-check-inline">
-                                            <input
-                                                class="form-check-input"
-                                                name="tags[]"
-                                                type="checkbox"
-                                                id="{{ $tag->title . '-' . $tag->id }}"
-                                                value="{{ $tag->id }}"
-                                            @if(isset($_GET['tags']))
-                                                {{ in_array($tag->id ,$_GET['tags']) ? 'checked' : '' }}
-                                                @endif
-                                            >
-                                            <label class="form-check-label" for="{{ $tag->title . '-' . $tag->id }}">{{ $tag->title }}</label>
-                                        </div>
-                                    @endforeach
+                                <div class="form-group pb-2 d-flex justify-content-between align-items-start">
+                                    <div>
+                                        @foreach($tags as $tag)
+                                            <div class="form-check form-check-inline">
+                                                <input
+                                                    class="form-check-input"
+                                                    name="tags[]"
+                                                    type="checkbox"
+                                                    id="{{ $tag->title . '-' . $tag->id }}"
+                                                    value="{{ $tag->id }}"
+                                                @if(isset($_GET['tags']))
+                                                    {{ in_array($tag->id ,$_GET['tags']) ? 'checked' : '' }}
+                                                    @endif
+                                                >
+                                                <label class="form-check-label" for="{{ $tag->title . '-' . $tag->id }}">{{ $tag->title }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
                                     <button id="addTaskButton" type="submit" class="btn btn-primary">Apply</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
 
-                            <table class="table mb-4">
+                    <div class="card border-light rounded-3 mt-3">
+                        <div class="card-body p-2">
+                            <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">No.</th>
+                                    <th scope="col">Id</th>
                                     <th scope="col">Preview</th>
                                     <th scope="col">Todo item</th>
                                     <th scope="col">Status</th>

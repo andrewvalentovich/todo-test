@@ -8,17 +8,19 @@
                     <div class="card rounded-3">
                         <div class="card-body p-4">
 
-
+                            <h4 class="text-center my-3 pb-3">Edit planner</h4>
                             <div class="row">
                                 <div class="col-6">
                                     <form action="{{ route('planner.update', $planner->id) }}" method="post">
                                         @csrf
                                         @method('patch')
                                         <div class="form-group mb-4">
-                                            <input type="text" value="{{ old('title') ?? $planner->title }}" name="title" class="form-control" placeholder="Наименование">
+                                            <label for="planner-edit-text">Title</label>
+                                            <input id="planner-edit-text" type="text" value="{{ old('title') ?? $planner->title }}" name="title" class="form-control" placeholder="Наименование">
                                         </div>
 
                                         <div class="form-group mb-4">
+                                            <label for="planner-edit-text">Author</label>
                                             <select class="" id="tasks_tags1" name="author[]" data-placeholder="Выберите автора" style="width: 100%;">
                                                 <option selected disabled value="{{ $planner->author->id }}">{{ $planner->author->email }}</option>
                                             </select>
@@ -41,7 +43,7 @@
                                     <table class="table mb-4">
                                         <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
+                                            <th scope="col">Id</th>
                                             <th scope="col">User</th>
                                             <th scope="col">Roles</th>
                                             <th scope="col">Actions</th>
@@ -51,7 +53,7 @@
                                         @foreach($users as $user)
                                             <tr>
                                                 <th scope="row">{{ $user->id }}</th>
-                                                <th>{{ $user->email }}</th>
+                                                <td>{{ $user->email }}</td>
                                                 <td>{{ $user->role->name }}</td>
                                                 <td>
                                                     <a href="{{ route('role.edit', $user->role->id) }}" class="btn btn-primary">Edit</a>
